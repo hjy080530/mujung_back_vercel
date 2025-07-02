@@ -1,14 +1,23 @@
 {
-  "name": "${PROJECT_NAME}",
+  "name": "mujung-back",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "dev": "ts-node src/server.ts"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@supabase/supabase-js": "^2.50.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.0.1",
+    "express": "^5.1.0"
+  },
   "devDependencies": {
-    "typescript": "^5.5.3"
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
   },
   "private": true
 }
