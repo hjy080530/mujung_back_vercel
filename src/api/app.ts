@@ -16,7 +16,7 @@ app.use(express.json());
 app.use('/votes', votesRoute);
 app.use('/songs', songRoutes);
 app.use('/search',searchRoute);
-app.use('/oauth', oauthRouter);
 app.use(passport.initialize());
+app.use('/oauth', oauthRouter);
 
 export default app;
