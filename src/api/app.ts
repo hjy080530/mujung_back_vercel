@@ -5,6 +5,8 @@ import songRoutes from './routes/songs.route';
 import votesRoute from "./routes/votes.route";
 import searchRoute from "./routes/search.route";
 import oauthRouter from './routes/oauth.route';
+import passport from "passport";
+import '../lib/passport';
 
 dotenv.config();
 
@@ -14,6 +16,7 @@ app.use(express.json());
 app.use('/votes', votesRoute);
 app.use('/songs', songRoutes);
 app.use('/search',searchRoute);
-app.use('/oauth', oauthRouter); 
+app.use('/oauth', oauthRouter);
+app.use(passport.initialize());
 
 export default app;
