@@ -5,6 +5,6 @@ import {voteForSong} from "../controllers/vote.controller";
 
 const router = Router();
 
-router.post('/', requireBssmEmail, voteForSong);
+router.post('/', voteForSong);
 
 export default router;
