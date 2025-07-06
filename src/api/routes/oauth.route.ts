@@ -13,7 +13,7 @@ router.get('/google/callback', passport.authenticate('google', {
   session: false,
 }), (req, res) => {
   const from = req.query.state || '/';
-  res.redirect(`https://mujung.vercel.app${from}`);
+  res.redirect(`https://mujung-three.vercel.app${from}`);
 });
 
 export default router;
