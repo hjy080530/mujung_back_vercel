@@ -7,7 +7,7 @@
     "build": "tsc",
     "vercel-build": "pnpm build",
     "start": "node dist/server.js",
-    "dev": "ts-node api/server.ts"
+    "dev": "ts-node src/api/server.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.50.2",
