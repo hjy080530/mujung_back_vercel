@@ -11,6 +11,8 @@ yarn-error.log*
 
 /process.env.
 process.env.
+
+
 .env
 .env.*
 .vscode/*
