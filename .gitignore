@@ -8,11 +8,6 @@ yarn-error.log*
 /.pnp
 .pnp.js
 
-
-/process.env.
-process.env.
-
-
 .env
 .env.*
 .vscode/*
