@@ -2,9 +2,7 @@ import { Request, Response } from 'express';
 import supabase from '../services/supabase';
 import { getTrackInfo } from '../services/spotify';
 
-interface CreateSongBody {
-    link: string;
-}
+interface CreateSongBody { link: string; }
 
 export const createSong = async (
     req: Request<{}, any, CreateSongBody>,
@@ -24,12 +22,16 @@ export const createSong = async (
             .select();
 
         if (error) {
+            console.error('❌ [createSong] insert error:', error);
             res.status(500).json({ message: '곡 등록 실패', error });
             return;
         }
         res.status(201).json(data);
+        return;
     } catch (err: any) {
-        res.status(500).json({ message: 'Spotify에서 정보 조회 실패', detail: err.message });
+        console.error('🔥 [createSong] exception:', err);
+        res.status(500).json({ message: 'Spotify 정보 조회 실패', detail: err.message });
+        return;
     }
 };
 
@@ -37,29 +39,22 @@ export const getSongs = async (
     req: Request,
     res: Response
 ): Promise<void> => {
-    console.log('▶ [getSongs] start');
-    console.log('▶ [getSongs] SUPABASE_URL=', process.env.SUPABASE_URL);
-    console.log('▶ [getSongs] SUPABASE_KEY=', process.env.SUPABASE_ANON_KEY);
-
     try {
-        console.log('▶ [getSongs] calling supabase.from(...).select()');
         const { data, error } = await supabase
             .from('spotify_information')
             .select('*')
             .order('link_id', { ascending: false });
 
-        console.log('▶ [getSongs] supabase returned:', { data, error });
-
         if (error) {
-            console.error('❌ [getSongs] Supabase error:', error);
-            res.status(500).json({ message: error.message, details: error });
+            console.error('❌ [getSongs] error:', error);
+            res.status(500).json({ message: error.message });
             return;
         }
-
-        console.log('▶ [getSongs] sending data:', data?.length, 'items');
         res.status(200).json(data);
+        return;
     } catch (e: any) {
-        console.error('🔥 [getSongs] exception:', e);
+        console.error(' [getSongs] exception:', e);
         res.status(500).json({ message: '서버 예외 발생', detail: e.message });
+        return;
     }
 };
