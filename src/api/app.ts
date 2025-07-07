@@ -6,7 +6,7 @@ import votesRoute from "./routes/votes.route";
 import searchRoute from "./routes/search.route";
 import oauthRouter from './routes/oauth.route';
 import passport from "passport";
-import '../../lib/passport';
+import '../lib/passport';
 
 dotenv.config();
 
