@@ -17,6 +17,8 @@ app.use('/votes', votesRoute);
 app.use('/songs', songRoutes);
 app.use('/search',searchRoute);
 app.use(passport.initialize());
+console.log('GOOGLE_CLIENT_ID', process.env.GOOGLE_CLIENT_ID);
+console.log('GOOGLE_CLIENT_SECRET', process.env.GOOGLE_CLIENT_SECRET);
 app.use('/oauth', oauthRouter);
 
 export default app;

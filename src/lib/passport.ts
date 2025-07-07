@@ -11,8 +11,5 @@ passport.use(new GoogleStrategy({
     profile: Profile,
     done: (error: any, user?: any) => void
 ) => {
-    console.log('GOOGLE_CLIENT_ID', process.env.GOOGLE_CLIENT_ID);
-    console.log('GOOGLE_CLIENT_SECRET', process.env.GOOGLE_CLIENT_SECRET);
-    console.log('Google Profile:', profile);
     return done(null, profile);
 }));
