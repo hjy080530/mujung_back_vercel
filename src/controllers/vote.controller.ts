@@ -1,7 +1,16 @@
 import { Request, Response } from 'express';
 import supabase from '../services/supabase';
 
-export const voteForSong = async (req: Request, res: Response): Promise<void> => {
+// Body 타입 명시
+interface VoteBody {
+    link_id: string;
+    user_id: string;
+}
+
+export const voteForSong = async (
+    req: Request<{}, any, VoteBody>,
+    res: Response
+): Promise<void> => {
     const { link_id, user_id } = req.body;
 
     if (!link_id || !user_id) {

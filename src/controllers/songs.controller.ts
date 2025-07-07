@@ -2,7 +2,14 @@ import { Request, Response } from 'express';
 import supabase from '../services/supabase';
 import { getTrackInfo } from '../services/spotify';
 
-export const createSong = async (req: Request, res: Response): Promise<void> => {
+interface CreateSongBody {
+    link: string;
+}
+
+export const createSong = async (
+    req: Request<{}, any, CreateSongBody>,
+    res: Response
+): Promise<void> => {
     const { link } = req.body;
     if (!link) {
         res.status(400).json({ message: 'link가 필요합니다.' });
@@ -11,7 +18,6 @@ export const createSong = async (req: Request, res: Response): Promise<void> => 
 
     try {
         const { link_id, song_name, song_artist } = await getTrackInfo(link);
-
         const { data, error } = await supabase
             .from('spotify_information')
             .insert([{ link_id, link, song_name, song_artist }])
@@ -26,8 +32,12 @@ export const createSong = async (req: Request, res: Response): Promise<void> => 
         res.status(500).json({ message: 'Spotify에서 정보 조회 실패', detail: err.message });
     }
 };
-export const getSongs = async (req: Request, res: Response): Promise<void> => {
-    console.log('▶ [getSongs] start');                         // 1️⃣ 시작
+
+export const getSongs = async (
+    req: Request,
+    res: Response
+): Promise<void> => {
+    console.log('▶ [getSongs] start');
     console.log('▶ [getSongs] SUPABASE_URL=', process.env.SUPABASE_URL);
     console.log('▶ [getSongs] SUPABASE_KEY=', process.env.SUPABASE_ANON_KEY);
 
@@ -53,7 +63,3 @@ export const getSongs = async (req: Request, res: Response): Promise<void> => {
         res.status(500).json({ message: '서버 예외 발생', detail: e.message });
     }
 };
-function extractSpotifyId(link: string): string {
-    const parts = link.split('/');
-    return parts[parts.length - 1].split('?')[0];
-}
