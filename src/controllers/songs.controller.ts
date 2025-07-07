@@ -27,19 +27,32 @@ export const createSong = async (req: Request, res: Response): Promise<void> => 
     }
 };
 export const getSongs = async (req: Request, res: Response): Promise<void> => {
-    const { data, error } = await supabase
-        .from('spotify_information')
-        .select('*')
-        .order('link_id', { ascending: false });
+    console.log('▶ [getSongs] start');                         // 1️⃣ 시작
+    console.log('▶ [getSongs] SUPABASE_URL=', process.env.SUPABASE_URL);
+    console.log('▶ [getSongs] SUPABASE_KEY=', process.env.SUPABASE_ANON_KEY);
 
-    if (error) {
-        res.status(500).json({ error });
-        return;
+    try {
+        console.log('▶ [getSongs] calling supabase.from(...).select()');
+        const { data, error } = await supabase
+            .from('spotify_information')
+            .select('*')
+            .order('link_id', { ascending: false });
+
+        console.log('▶ [getSongs] supabase returned:', { data, error });
+
+        if (error) {
+            console.error('❌ [getSongs] Supabase error:', error);
+            res.status(500).json({ message: error.message, details: error });
+            return;
+        }
+
+        console.log('▶ [getSongs] sending data:', data?.length, 'items');
+        res.status(200).json(data);
+    } catch (e: any) {
+        console.error('🔥 [getSongs] exception:', e);
+        res.status(500).json({ message: '서버 예외 발생', detail: e.message });
     }
-
-    res.json(data);
 };
-
 function extractSpotifyId(link: string): string {
     const parts = link.split('/');
     return parts[parts.length - 1].split('?')[0];
