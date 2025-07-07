@@ -20,7 +20,7 @@ router.get(
         });
 
         const email = user.emails[0].value;
-        res.redirect(`https://mujung-three.vercel.app/?token=${token}&email=${email}`);
+        res.redirect(`https://mujung.vercel.app/?token=${token}&email=${email}`);
     }
 );
 
