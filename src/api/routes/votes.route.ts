@@ -1,7 +1,5 @@
 import { Router } from 'express';
-import {requireBssmEmail} from "../auth/requireBssmEmail";
-import {voteForSong} from "../controllers/vote.controller";
-
+import { voteForSong } from '../controllers/vote.controller';
 
 const router = Router();
 

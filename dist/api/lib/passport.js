@@ -10,6 +10,12 @@ passport_1.default.use(new passport_google_oauth20_1.Strategy({
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     callbackURL: 'https://mujung-back-vercel.vercel.app/oauth/google/callback',
 }, (accessToken, refreshToken, profile, done) => {
-    console.log('Google Profile:', profile);
     return done(null, profile);
 }));
+passport_1.default.serializeUser((user, done) => {
+    done(null, user);
+});
+passport_1.default.deserializeUser((user, done) => {
+    done(null, user);
+});
+exports.default = passport_1.default;
