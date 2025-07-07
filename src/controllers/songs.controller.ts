@@ -1,12 +1,11 @@
-import { Request, Response } from 'express';
 import supabase from '../services/supabase';
 import { getTrackInfo } from '../services/spotify';
 
 interface CreateSongBody { link: string; }
 
 export const createSong = async (
-    req: Request<{}, any, CreateSongBody>,
-    res: Response
+    req: any,
+    res:any
 ): Promise<void> => {
     const { link } = req.body;
     if (!link) {
@@ -36,8 +35,8 @@ export const createSong = async (
 };
 
 export const getSongs = async (
-    req: Request,
-    res: Response
+    req: any,
+    res: any
 ): Promise<void> => {
     try {
         const { data, error } = await supabase

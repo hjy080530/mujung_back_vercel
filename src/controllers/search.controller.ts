@@ -1,9 +1,8 @@
-import { Request, Response } from 'express';
 import { searchTrack } from '../services/spotify';
 
 export const searchSong = async (
-    req: Request<{}, any, any, { title?: string; artist?: string }>,
-    res: Response
+    req: any,
+    res: any
 ): Promise<void> => {
     const { title, artist } = req.query;
     if (!title || !artist) {
