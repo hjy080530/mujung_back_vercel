@@ -16,11 +16,13 @@ router.get(
         console.log('최종 유저 정보:', user);
 
         const email = user.emails[0].value;
-        const user_id = user.id; // 여기가 핵심!
+        const user_id = user.id;
 
-        const token = jwt.sign({ email, user_id }, process.env.JWT_SECRET!, {
-            expiresIn: '1d',
-        });
+        const token = jwt.sign(
+            { email, user_id },
+            process.env.JWT_SECRET!,
+            { expiresIn: '1d' }
+        );
 
         res.redirect(`https://mujung.vercel.app/?token=${token}&email=${email}&user_id=${user_id}`);
     }
