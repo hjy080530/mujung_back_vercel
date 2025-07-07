@@ -24,7 +24,7 @@ router.get(
             { expiresIn: '1d' }
         );
 
-        res.redirect(`https://mujung.vercel.app/?token=${token}&email=${email}&user_id=${user_id}`);
+        res.redirect(`https://mujung-back-vercel.vercel.app/?token=${token}&email=${email}&user_id=${user_id}`);
     }
 );
 
