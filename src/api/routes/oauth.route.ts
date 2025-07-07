@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import passport from '../../lib/passport';
+import passport from '../lib/passport';
 import jwt from "jsonwebtoken";
 
 const router = Router();
