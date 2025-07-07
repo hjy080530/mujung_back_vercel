@@ -13,6 +13,11 @@
   },
   "include": [
     "src/**/*",
-    "api/**/*"
+    "api/**/*",
+    "types/**/*"
+  ],
+  "exclude": [
+    "dist",
+    "node_modules"
   ]
 }
