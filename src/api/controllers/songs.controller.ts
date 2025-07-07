@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import type { Request, Response } from 'express';
 import supabase from '../services/supabase';
 import { getTrackInfo } from '../services/spotify';
 

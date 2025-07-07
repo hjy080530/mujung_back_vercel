@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import type { Request, Response } from 'express';
 import { searchTrack } from '../services/spotify';
 
 export const searchSong = async (req: Request, res: Response): Promise<void> => {
