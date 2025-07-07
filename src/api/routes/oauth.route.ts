@@ -15,12 +15,14 @@ router.get(
         const user = req.user as any;
         console.log('최종 유저 정보:', user);
 
-        const token = jwt.sign({ email: user.emails[0].value }, process.env.JWT_SECRET!, {
+        const email = user.emails[0].value;
+        const user_id = user.id; // 여기가 핵심!
+
+        const token = jwt.sign({ email, user_id }, process.env.JWT_SECRET!, {
             expiresIn: '1d',
         });
 
-        const email = user.emails[0].value;
-        res.redirect(`https://mujung.vercel.app/?token=${token}&email=${email}`);
+        res.redirect(`https://mujung.vercel.app/?token=${token}&email=${email}&user_id=${user_id}`);
     }
 );
 
